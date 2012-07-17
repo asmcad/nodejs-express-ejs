@@ -59,40 +59,8 @@ app.get('/posts', post.list);
 // neo
 
 app.get('/neo', neo.index);
-
-
-
-app.get('/db', function(req, res) 
-{
-  
-
-   shred.post({
-  url: "http://localhost:7474/db/data/node/6/relationships",
- 
-  // Shred will JSON-encode PUT/POST bodies
-  content: { "to" : "http://localhost:7474/db/data/node/7", "type" : "OFFF" },
-  on: {
-    // you can use response codes as events
-    201: function(response) {
-      console.log("User Created");
-    },
-    409: function (response) {
-      console.log("User with that name already exists.");
-    },
-    response: function(response) {
-      // We got a 40X that is not a 409, or a 50X
-      console.log("Oh no, something went wrong!");
-    }
-  }
-});
-  
-  
-
-  
- res.end("ohooo");
-	
-});
-
+app.get('/create_user', neo.create_user_get_exp);
+app.post('/create_user_post', neo.create_user_post_exp);
 
 
 
